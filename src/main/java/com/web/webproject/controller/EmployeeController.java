@@ -20,6 +20,6 @@ public class EmployeeController {
 
     @GetMapping(value = "getSalaryDetails")
     public void getSalaryDetails(){
-        System.out.println("The Salary Details");
+        System.out.println("The Salary Details Department");
     }
 }
