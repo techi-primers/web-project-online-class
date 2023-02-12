@@ -1,5 +1,6 @@
 package com.web.webproject.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,15 @@ public class EmployeeController {
 
     @GetMapping (value = "getSalaryDetails")
     public void getSalaryDetails() {
+        System.out.println("This is the salary detsils - updated ");
+    }
+
+
+
+    @GetMapping (value = "getOtherDetails")
+    public void getOtherDetails() {
+
+        ResponseEntity responseEntity = new ResponseEntity<String> (body: Server Error)
         System.out.println("This is the salary detsils - updated ");
     }
 
