@@ -10,7 +10,7 @@ public class EmployeeController {
 
     @GetMapping(value = "getEmployeeDetails")
     public void getEmployeeDetails() {
-        System.out.println("Hello I will send all the employee Details");
+        System.out.println("Hello I will send all the employee Details..");
         System.out.println(EmployeeController.calculateSum(12,34));
     }
 
