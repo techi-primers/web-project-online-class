@@ -52,6 +52,18 @@ public class EmployeeController {
 
     }
 
+    @GetMapping(value = "getExtendedEmployeeDetailsSuceesAndError")
+    public ResponseEntity<String> getExtendedEmployeeDetailsSuceesAndError() {
+
+        Integer no1 = 6;
+        if(no1%2==0) {
+            return new ResponseEntity<>("Even Number", HttpStatus.ACCEPTED);
+        } else {
+            return new ResponseEntity<>("Odd Number", HttpStatus.NOT_FOUND);
+        }
+
+    }
+
     private static Integer calculateSum(int valu1, int valu2) {
         return valu1 + valu2;
     }
