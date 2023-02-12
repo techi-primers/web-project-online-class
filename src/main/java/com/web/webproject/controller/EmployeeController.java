@@ -17,4 +17,9 @@ public class EmployeeController {
     private static Integer calculateSum(int valu1, int valu2) {
         return valu1 + valu2;
     }
+
+    @GetMapping(value = "getSalaryDetails")
+    public void getSalaryDetails(){
+        System.out.println("The Salary Details");
+    }
 }
