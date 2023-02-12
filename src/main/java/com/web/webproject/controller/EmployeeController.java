@@ -3,6 +3,7 @@ package com.web.webproject.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,6 +57,18 @@ public class EmployeeController {
     public ResponseEntity<String> getExtendedEmployeeDetailsSuceesAndError() {
 
         Integer no1 = 6;
+        if(no1%2==0) {
+            return new ResponseEntity<>("Even Number", HttpStatus.ACCEPTED);
+        } else {
+            return new ResponseEntity<>("Odd Number", HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+    @GetMapping(value = "getExtendedEmployeeById/{id}")
+    public ResponseEntity<String> getExtendedEmployeeById(@PathVariable("id") Integer id) {
+
+        Integer no1 = id;
         if(no1%2==0) {
             return new ResponseEntity<>("Even Number", HttpStatus.ACCEPTED);
         } else {
