@@ -14,6 +14,12 @@ public class EmployeeController {
         System.out.println(EmployeeController.calculateSum(12,34));
     }
 
+
+    @GetMapping (value = "getSalaryDetails")
+    public void getSalaryDetails() {
+        System.out.println("This is the salary detsils");
+    }
+
     private static Integer calculateSum(int valu1, int valu2) {
         return valu1 + valu2;
     }
