@@ -26,12 +26,13 @@ public class EmployeeNewController {
     }
 
 
-
     @GetMapping(value = "getEmployeeNewDetails/{employeeName}")
     public ResponseEntity<EmployeeNew> getExtendedEmployeeById(@PathVariable("employeeName") String name) {
 
         List<EmployeeNew> listOfEmployee = this.employeeRepository.findByEmployeeName(name);
         if(listOfEmployee!=null) {
+            System.out.println("Hello world");
+            //System.out.println(listOfEmployee.toString());
             return new ResponseEntity<>(listOfEmployee.get(0), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

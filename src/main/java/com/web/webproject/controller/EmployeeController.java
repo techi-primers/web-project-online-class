@@ -19,19 +19,11 @@ public class EmployeeController {
     }
 
 
-    @GetMapping (value = "getSalaryDetails")
+    @GetMapping (value = "getSalaryDetails2")
     public void getSalaryDetails() {
-        System.out.println("This is the salary detsils - updated ");
+                System.out.println("This is the salary detsils - updated ");
     }
 
-
-
-    @GetMapping (value = "getOtherDetails")
-    public void getOtherDetails() {
-
-        ResponseEntity responseEntity = new ResponseEntity<String> (body: Server Error)
-        System.out.println("This is the salary detsils - updated ");
-    }
 
     @GetMapping(value = "getExtendedEmployeeDetails202")
     public ResponseEntity<String> getExtendedEmployeeDetailsWith202() {
