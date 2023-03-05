@@ -5,10 +5,7 @@ import com.web.webproject.model.EmployeeNew;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,6 +34,17 @@ public class EmployeeNewController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
+
+    }
+
+    @PostMapping(value = "/save-employee")
+    public ResponseEntity<?> saveEmployee(@RequestBody EmployeeNew employeeNew) {
+        EmployeeNew savedObject = this.employeeRepository.save(employeeNew);
+        if(savedObject!=null) {
+            return new ResponseEntity<>(savedObject, HttpStatus.ACCEPTED);
+        } else {
+            return new ResponseEntity<>("Employee Not Persisted!!", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
     }
 

@@ -1,9 +1,12 @@
 package com.web.webproject.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "EmployeeNew")
+@Data
 public class EmployeeNew {
 
     @Id

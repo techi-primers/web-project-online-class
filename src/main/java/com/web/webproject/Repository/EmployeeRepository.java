@@ -16,4 +16,7 @@ public interface EmployeeRepository extends JpaRepository<EmployeeNew, Long > {
     List<EmployeeNew> findAll();
     //select * from Employee_NEw
 
+    // insert into EmloyeeDatabase values ("","","")
+
+
 }
