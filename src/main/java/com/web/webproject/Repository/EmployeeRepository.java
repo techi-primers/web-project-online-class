@@ -18,5 +18,7 @@ public interface EmployeeRepository extends JpaRepository<EmployeeNew, Long > {
 
     // insert into EmloyeeDatabase values ("","","")
 
+    EmployeeNew findEmployeeNewById(Long id);
+
 
 }

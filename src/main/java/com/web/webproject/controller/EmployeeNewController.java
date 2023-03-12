@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "employeeNew")
@@ -46,6 +47,38 @@ public class EmployeeNewController {
             return new ResponseEntity<>("Employee Not Persisted!!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+    }
+
+    @PutMapping(value = "/update-employee")
+    public ResponseEntity<?> updateEmployee(@RequestBody EmployeeNew employee) {
+
+        // employee object is going to update
+        // check employee exist
+        EmployeeNew employeeObj = this.employeeRepository.findEmployeeNewById(employee.getId());
+        //check null
+        EmployeeNew updatedEmployee = this.employeeRepository.save(employeeObj);
+        if (employeeObj != null) {
+            //update
+            return new ResponseEntity<>(updatedEmployee, HttpStatus.ACCEPTED);
+
+        } else {
+            // save
+            return new ResponseEntity<>(updatedEmployee, HttpStatus.CREATED);
+        }
+
+    }
+
+    @DeleteMapping(value = "delete-employee")
+    public ResponseEntity<?> deleteEmployee(@RequestBody EmployeeNew employee) {
+
+        EmployeeNew employeeObj = this.employeeRepository.findEmployeeNewById(employee.getId());
+
+        if (employeeObj !=null) {
+            this.employeeRepository.deleteById(employeeObj.getId());
+            return new ResponseEntity<>("Employee Object Was delted!!", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Employee Object does not exit!", HttpStatus.NOT_FOUND);
+        }
     }
 
     private static Integer calculateSum(int valu1, int valu2) {

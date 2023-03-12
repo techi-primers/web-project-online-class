@@ -17,4 +17,7 @@ public class EmployeeNew {
     private String employeeName;
     @Column(name="mobile_no")
     private String mobileNo;
+
+    @ManyToOne
+    private DepartmentNew departmentNew;
 }
