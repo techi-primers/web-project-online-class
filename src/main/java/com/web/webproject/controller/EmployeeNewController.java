@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "employeeNew")
 public class EmployeeNewController {
@@ -18,19 +19,37 @@ public class EmployeeNewController {
     EmployeeRepository employeeRepository;
 
     @GetMapping(value = "getEmployeeDetails")
-    public void getEmployeeDetails() {
-        System.out.println("Hello I will send all the employee Details..");
-        System.out.println(EmployeeNewController.calculateSum(12,34));
+    public ResponseEntity<?>  getEmployeeDetails() {
+        List<EmployeeNew> listOfEmployee = this.employeeRepository.findAll();
+        if(listOfEmployee!=null) {
+            return new ResponseEntity<>(listOfEmployee, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 
 
     @GetMapping(value = "getEmployeeNewDetails/{employeeName}")
-    public ResponseEntity<EmployeeNew> getExtendedEmployeeById(@PathVariable("employeeName") String name) {
+    public ResponseEntity<EmployeeNew> getExtendedEmployeeByName(@PathVariable("employeeName") String name) {
 
         List<EmployeeNew> listOfEmployee = this.employeeRepository.findByEmployeeName(name);
         if(listOfEmployee!=null) {
             return new ResponseEntity<>(listOfEmployee.get(0), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+
+    }
+
+
+    @GetMapping(value = "getEmployeeNewDetailsById/{id}")
+    public ResponseEntity<EmployeeNew> getExtendedEmployeeById(@PathVariable("id") Long id) {
+
+        EmployeeNew employeeObj = this.employeeRepository.findEmployeeNewById(id);
+        if(employeeObj!=null) {
+            return new ResponseEntity<>(employeeObj, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -80,6 +99,15 @@ public class EmployeeNewController {
             return new ResponseEntity<>("Employee Object does not exit!", HttpStatus.NOT_FOUND);
         }
     }
+
+    /*@GetMapping(value = "getEmplaoyeeByDepartmentId/{departentId}")
+    public ResponseEntity<?> getEmplaoyeeByDepartmentId (@PathVariable("departmentId") Integer departmentId) {
+
+        List<EmployeeNew> employee = this.employeeRepository.findEmployeeNewByDepartmentNew(departmentId);
+
+        return new ResponseEntity<>(employee, HttpStatus.OK);
+
+    }*/
 
     private static Integer calculateSum(int valu1, int valu2) {
         return valu1 + valu2;

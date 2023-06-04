@@ -1,5 +1,6 @@
 package com.web.webproject.Repository;
 
+import com.web.webproject.model.DepartmentNew;
 import com.web.webproject.model.EmployeeNew;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -19,6 +20,8 @@ public interface EmployeeRepository extends JpaRepository<EmployeeNew, Long > {
     // insert into EmloyeeDatabase values ("","","")
 
     EmployeeNew findEmployeeNewById(Long id);
+
+    List<EmployeeNew> findEmployeeNewByDepartmentNew(DepartmentNew departmentId) ;
 
 
 }
