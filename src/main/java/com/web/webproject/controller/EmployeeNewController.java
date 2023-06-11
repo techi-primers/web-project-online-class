@@ -75,14 +75,14 @@ public class EmployeeNewController {
         // check employee exist
         EmployeeNew employeeObj = this.employeeRepository.findEmployeeNewById(employee.getId());
         //check null
-        EmployeeNew updatedEmployee = this.employeeRepository.save(employeeObj);
         if (employeeObj != null) {
+            EmployeeNew updatedEmployee = this.employeeRepository.save(employee);
             //update
             return new ResponseEntity<>(updatedEmployee, HttpStatus.ACCEPTED);
 
         } else {
             // save
-            return new ResponseEntity<>(updatedEmployee, HttpStatus.CREATED);
+            return new ResponseEntity<>("Employee Not Found!", HttpStatus.NOT_FOUND);
         }
 
     }
