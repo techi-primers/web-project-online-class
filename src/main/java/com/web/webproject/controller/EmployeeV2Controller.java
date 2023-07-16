@@ -3,6 +3,7 @@ package com.web.webproject.controller;
 
 import com.web.webproject.Repository.EmployeeRepository;
 import com.web.webproject.model.EmployeeNew;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "employeeV2")
+@Slf4j
 public class EmployeeV2Controller {
 
     @Autowired
@@ -47,5 +49,27 @@ public class EmployeeV2Controller {
 
         return new ResponseEntity<>(toBeUpdate.size() + " record count were update", HttpStatus.ACCEPTED);
 
+    }
+
+
+    @DeleteMapping(value = "delete-employee-v2/{id}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable("id") List<Long> ids) {
+
+        List<EmployeeNew> toBeDelete = new ArrayList<>();
+        for(Long id : ids) {
+            EmployeeNew employeeObj = this.employeeRepository.findEmployeeNewById(id);
+            if(employeeObj!=null) {
+                log.info("Employee : {} going to delete",employeeObj);
+
+                toBeDelete.add(employeeObj);
+            }
+        }
+
+        toBeDelete.forEach(rec -> {
+            rec.setModifiedDate(new java.util.Date());
+            this.employeeRepository.deleteById(rec.getId());
+        });
+
+        return new ResponseEntity<>(toBeDelete.size() + " record count were delete", HttpStatus.ACCEPTED);
     }
 }
